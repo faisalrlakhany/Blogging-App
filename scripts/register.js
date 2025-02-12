@@ -51,13 +51,15 @@ import { auth, db } from "./firebaseconfig.js";
         //    window.location = 'login.html';
 
         try {
-            const docRef = await addDoc(collection(db, "blogs-User"), {
+            const docRef = await addDoc(collection(db, "users"), {
                 fullName: username.value,
                 email: email.value,
                 profileImage: userProfilePicUrl,
                 uid: user.uid
             });
             console.log("Document written with ID: ", docRef.id);
+            console.log("Thanks For Registration");
+            
         } catch (e) {
             console.error("Error adding document: ", e);
         }

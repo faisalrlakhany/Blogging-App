@@ -31,7 +31,7 @@ import { collection, getDocs, query, where } from "https://www.gstatic.com/fireb
 
     async function getDataFromFirestore() {
         let user = null
-        const q = query(collection(db, "blogs-User"), where("uid", "==", auth.currentUser.uid));
+        const q = query(collection(db, "users"), where("uid", "==", auth.currentUser.uid));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             user = doc.data()
