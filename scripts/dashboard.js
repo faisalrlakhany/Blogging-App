@@ -1,18 +1,15 @@
 
-import { collection, addDoc , Timestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { collection, addDoc , Timestamp , getDocs, query, where ,orderBy  } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 import { auth, db } from "./firebaseconfig.js";
-import {  getDocs, query, where ,orderBy} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-
-
-
+import {  onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
     const title = document.querySelector('#title')
-    const file = document.querySelector('#file')
     const form = document.querySelector('#form')
     let blogImg = ''
     const displayBlog = document.querySelector('#display-container')
     let allBlog = []
     let time = Timestamp.fromDate(new Date())
+
     // cloudnary config
 
     let inputFile = cloudinary.createUploadWidget({
@@ -36,6 +33,36 @@ import {  getDocs, query, where ,orderBy} from "https://www.gstatic.com/firebase
 
     
 
+    
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+       
+        const uid = user.uid;
+        console.log(uid);
+        getDataFromFirestore();
+        
+      } else {
+       
+        window.location = 'login.html'
+
+      }
+    });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // send data to firestore
     form.addEventListener('submit' , async(event)=> {
@@ -47,11 +74,11 @@ import {  getDocs, query, where ,orderBy} from "https://www.gstatic.com/firebase
             const docRef = await addDoc(collection(db, "blog-user"), {
               title:title.value,
               image:blogImg,
-              date:time ,
+              date:time,
               uid:auth.currentUser.uid
             });
 
-            allBlog.push({id: docRef.id, title: title.value, image: blogImg , time: time });
+            allBlog.push({id: docRef.id, title: title.value, image: blogImg  , date:time });
             console.log("Document written with ID: ", docRef.id);
 
             renderBlog();
@@ -68,12 +95,11 @@ import {  getDocs, query, where ,orderBy} from "https://www.gstatic.com/firebase
    async function getDataFromFirestore(){
 
 
-        const q = query(collection(db, "blog-user"), orderBy("date" , "desc"));
+        const q = query(collection(db, "blog-user"), where("uid", "==", auth.currentUser.uid),orderBy("date" , "desc"));
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((item) => {
 
-        // console.log(`${item.id} => ${item.data()}`);
         allBlog.push({ id:item.id, ...item.data() })
 
         });
@@ -85,7 +111,7 @@ import {  getDocs, query, where ,orderBy} from "https://www.gstatic.com/firebase
        
     }
 
-    getDataFromFirestore()
+    
 
 
 
@@ -93,26 +119,36 @@ import {  getDocs, query, where ,orderBy} from "https://www.gstatic.com/firebase
 
     function renderBlog(){
 
-      displayBlog.innerHtml += ''
+      displayBlog.innerHTML = ''
+
 
         allBlog.map((item)=>{
 
-            // const convertedTime = item.time.toDate();
+            const convertedTime = item.date.toDate();
 
 
-            // const date = convertedTime.toLocaleString();
+            const date = convertedTime.toLocaleString();
 
 
             displayBlog.innerHTML +=`<div class="blog-entry">
-            <h3>Your Blog</h3>
-            <p class="blog-description">${item.title}</p>
-            <div class="blog-content">
-              <img src=${item.image} alt="Sample Image" class="blog-image">
-              {/* <p class="uploaded-time">Uploaded Time: ${date}</p>  */}
-            </div>
-          </div>`
+      <h3 class="blog-heading">Your Blog's</h3>
+      <h2 class="blog-description">${item.title}</h2>
+      <div class="blog-content">
+        <img src=${item.image} alt="Blog Image" class="blog-image">
+        <p class="uploaded-time"><b>Uploaded Time: </b> ${date}</p>
+      </div>
+    </div>`
 
 
 
         })
     }
+
+    
+
+
+
+
+
+
+    

@@ -127,3 +127,35 @@
     }
   }
   
+  .main-div {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid black;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Styling for the inner div */
+  .inner-div {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  /* Styling for the heading */
+  .inner-div h1 {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+  /* Styling for the image */
+  .inner-div img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  

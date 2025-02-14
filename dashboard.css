@@ -94,84 +94,62 @@ button:focus {
   outline: none;
 }
 
-/* Display Container Styling */
+
+/* Overall container for the blog entry */
 #display-container {
-  max-width: 1200px;
-  margin: 50px auto;
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the blog entry box */
+.blog-entry {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.blog-entry {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  margin-bottom: 20px; /* Adds space between multiple blog boxes */
   padding: 20px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #fff; /* White background for each entry */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.blog-entry:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.blog-entry h3 {
+/* Heading of the blog post */
+.blog-heading {
   font-size: 24px;
-  color: #333;
+  font-weight: bold;
   margin-bottom: 10px;
-  font-weight: 600;
 }
 
+/* Description of the blog */
 .blog-description {
   font-size: 16px;
   color: #555;
-  margin-bottom: 15px;
-  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
+/* Content section with the image and time */
 .blog-content {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
 }
 
+/* Image styling */
 .blog-image {
-  max-width: 100%;
+  max-width: 200px;
+  height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
-  width: 48%;
-  height: 200px;
 }
 
-.blog-entry p {
+/* Styling the time to appear on the right */
+.uploaded-time {
   font-size: 14px;
   color: #777;
-}
-
-.blog-entry p:first-of-type {
-  font-weight: bold;
-}
-
-.blog-entry .uploaded-time {
-  font-size: 14px;
-  color: #888;
-  margin-top: 10px;
-}
-
-/* Media Query for Small Screens */
-@media (max-width: 768px) {
-  .blog-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .blog-image {
-    width: 100%;
-    height: auto;
-  }
+  margin-left: auto;
+  text-align: right;
 }
