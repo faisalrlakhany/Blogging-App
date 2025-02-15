@@ -1,55 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Navbar</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar and Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50">
 
-  <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Left side: Main Heading -->
-      <h1 class="navbar-logo">
-        <a href="register.html">My Website</a>
-      </h1>
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-teal-400 to-teal-600 p-4">
+        <div class="max-w-screen-xl mx-auto flex items-center justify-between">
+            <!-- Website Title (Always visible) -->
+            <h1 class="text-white text-3xl font-bold">My Website</h1>
 
-      <!-- Right side: Login Button and User Info -->
-      <div class="right-side">
-        <!-- Login Button Div -->
-        <div class="login-btn-container" id="login-btn">
-          <a href="login.html" class="login-btn">Log In</a>
+            <!-- Left Side: (Visible on Desktop only) -->
+            <!-- Nothing here for left side -->
+
+            <!-- Right Side: Login Button (Visible on Desktop only) -->
+            <div class="hidden md:block ml-auto" id="login-btn" >
+                <button class="bg-teal-700 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition duration-300" >
+                    Login
+                </button>
+            </div>
+
+            <!-- Right Side (Desktop Only) -->
+            <div class="hidden  items-center space-x-4 ml-auto" id="user-info">
+                <!-- Profile Image and Heading -->
+                <div class="flex items-center space-x-2">
+                    <img src="" alt="Profile" class="w-8 h-8 rounded-full" id="user-image">
+                    <h2 class="text-white text-lg font-semibold" id="user-name">John Doe</h2>
+                </div>
+
+                <!-- Logout and Dashboard buttons -->
+                <div class="flex space-x-2">
+                    <button class="bg-teal-700 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition duration-300" id="log-out-desktop" >
+                        Logout
+                    </button>
+                    <button class="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-400 transition duration-300"><a href="dashboard.html">
+                        Dashboard
+                    </a></button>
+                </div>
+            </div>
+
+            <!-- Hamburger Menu Button (Mobile Only) -->
+            <button class="md:hidden text-white" id="hamburger">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
 
-        <!-- User Info Div (Image, Name, and Sign Out Button) -->
-        <div class="user-info del" id="user-info">
-          <img class="user-img" src="" alt="User Logo" id="user-img">
-          <span class="user-name" id="user-name">John Doe</span>
-          <a href="signout.html" class="login-btn" id="sign-out">Sign Out</a>
-          <a href="dashboard.html" class="login-btn">Dashboard</a>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden flex flex-col space-y-4 p-4">
+            <!-- Mobile Buttons (Login, Logout, Dashboard) and Profile -->
+            <div class="space-y-4">
+                <button class="bg-teal-700 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition duration-300 w-full" id="mobile-login">
+                    Login
+                </button>
+
+                <!-- Profile Image, Heading, Logout, Dashboard (Inside Hamburger) -->
+                <div class="flex flex-col items-start space-y-4" id="mobile-btn">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                    <h2 class="text-teal-600 text-lg font-semibold">John Doe</h2>
+                    <button class="bg-teal-700 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition duration-300 w-full" id="log-out">
+                        Logout
+                    </button>
+                    <button class="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-400 transition duration-300 w-full"><a href="dashboard.html">
+                        Dashboard
+                    </a></button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
+    <!-- Blog Section -->
+    <section class="py-10 bg-teal-50">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8" id="display-container">
+                <!-- Blog Items (keep as is) -->
+                
+                </div>
 
-
-  <div class="main-div" id="display-container">
-    <!-- <div class="inner-div">
-      <h1>Title Heading</h1>
-      <img src="https://via.placeholder.com/500" alt="Placeholder Image">
-    </div> -->
-  </div>
-  
-
-
-
-
+                <!-- More Blog Items... -->
+            </div>
+        </div>
+    </section>
 
     <script type="module" src="scripts/app.js"></script>
 
-
 </body>
 </html>
-

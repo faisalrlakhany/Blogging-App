@@ -3,45 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="login.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Login Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
-            <div class="wrapper">
-                <div class="form-header">
-                    <div class="titles">
-                        <div class="title-login">Login</div>
-                    </div>
-                </div>
-                                <!-- LOGIN FORM -->
+<body class="bg-gray-50">
 
-                <form action="" class="login-form" id="form">
-                    <div class="input-box">
-                        <input type="text" class="input-field" id="log-email" required>
-                        <label for="log-email" class="label">Email</label>
-                        <i class='bx bx-envelope icon'></i>
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-teal-500 to-teal-600 p-4">
+        <div class="max-w-screen-xl mx-auto flex items-center justify-between">
+            <h1 class="text-white text-3xl font-bold">My Website</h1>
+        </div>
+    </nav>
+
+    <!-- Login Form Section -->
+    <section class="py-16">
+        <div class="max-w-screen-sm mx-auto px-6">
+            <div class="bg-white p-8 shadow-lg rounded-lg border border-teal-500">
+                <h2 class="text-teal-600 text-3xl font-semibold mb-8 text-center">Login to Your Account</h2>
+
+                <form action="#" id="form">
+                    <!-- Email Field -->
+                    <div class="mb-6">
+                        <label for="email" class="block text-teal-600 font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" required class="w-full p-4 border border-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 transition duration-300" placeholder="Enter your email">
                     </div>
-                    <div class="input-box">
-                        <input type="password" class="input-field" id="log-pass" required>
-                        <label for="log-pass" class="label">Password</label>
-                        <i class='bx bx-lock-alt icon'></i>
+
+                    <!-- Password Field -->
+                    <div class="mb-6">
+                        <label for="password" class="block text-teal-600 font-medium mb-2">Password</label>
+                        <input type="password" id="password" name="password" required class="w-full p-4 border border-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 transition duration-300" placeholder="Enter your password">
                     </div>
-                    <div class="form-cols">
-                        <div class="col-1"></div>
-                        <div class="col-2">
-                            <a href="#">Forgot password?</a>
-                        </div>
-                    </div>
-                    <div class="input-box">
-                        <button class="btn-submit" id="SignInBtn">Log In <i class='bx bx-log-in'></i></button>
-                    </div>
-                    <div class="switch-form">
-                        <span>Don't have an account? <a href="register.html" >Register</a></span>
-                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="w-full bg-teal-600 text-white py-4 rounded-lg hover:bg-teal-500 transition duration-300">Login</button>
                 </form>
+
+                <!-- Registration Link -->
+                <p class="mt-6 text-center text-teal-600">
+                    Don't have an account? <a href="register.html" class="font-semibold hover:text-teal-500">Register</a>
+                </p>
             </div>
+        </div>
+    </section>
 
 
 
@@ -53,10 +56,9 @@
 
 
 
+    <script type="module" src="scripts/login.js"></script>
 
 
 
-    <script src="scripts/login.js" type="module"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
 </html>

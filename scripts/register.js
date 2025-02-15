@@ -1,15 +1,23 @@
 
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { auth, db } from "./firebaseconfig.js";
+    import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+    import { auth, db } from "./firebaseconfig.js";
 
 
-   const username = document.querySelector('#reg-name');
-    const email = document.querySelector('#reg-email');
-    const password = document.querySelector('#reg-pass');
-    const btn = document.querySelector('#form');
 
-    let userProfilePicUrl = ""
+
+
+    const form = document.querySelector("#form")
+    const username = document.querySelector("#username")
+    const email = document.querySelector("#email")
+    const password = document.querySelector("#password")
+    const file = document.querySelector("#file")
+
+
+
+
+    
+    let profilePicture = ""
 
     let inputFile = cloudinary.createUploadWidget({
         cloudName: 'dt0eqxlvz',
@@ -17,16 +25,19 @@ import { auth, db } from "./firebaseconfig.js";
     }, (error, result) => {
         if (!error && result && result.event === "success") {
             console.log('Done! Here is the image info: ', result.info);
-            userProfilePicUrl = result.info.secure_url
+            profilePicture = result.info.secure_url
         }
     }
     )
 
+    file.addEventListener("click" , (event)=>{
 
-    document.querySelector('#input-file').addEventListener("click", function (event) {
         event.preventDefault();
-        inputFile.open();
-    }, false);
+
+        inputFile.open()
+
+
+    })
 
 
 
@@ -34,31 +45,33 @@ import { auth, db } from "./firebaseconfig.js";
 
 
 
-
-
-
-
-
-    btn.addEventListener('submit' , function(event){
+    form.addEventListener("submit" , (event)=>{
 
 
         event.preventDefault();
+
+        console.log(username.value);
+        console.log(email.value);
+        console.log(password.value);
+        
+
+
         createUserWithEmailAndPassword(auth, email.value, password.value )
         .then( async(userCredential) => {
         // Signed up 
            const user = userCredential.user;
            console.log(user);
-        //    window.location = 'login.html';
+           window.location = 'login.html';
 
         try {
-            const docRef = await addDoc(collection(db, "users"), {
+            const docRef = await addDoc(collection(db, "registered"), {
                 fullName: username.value,
                 email: email.value,
-                profileImage: userProfilePicUrl,
+                profileImage: profilePicture,
                 uid: user.uid
             });
             console.log("Document written with ID: ", docRef.id);
-            console.log("Thanks For Registration");
+            alert("Thanks For Registration");
             
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -69,7 +82,6 @@ import { auth, db } from "./firebaseconfig.js";
            username.value='';
      })
          .catch((error) => {
-           const errorCode = error.code;
            const errorMessage = error.message;
            console.log(errorMessage);
            alert("Already Registered");
@@ -80,4 +92,21 @@ import { auth, db } from "./firebaseconfig.js";
     })
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     
+
+
+
+
