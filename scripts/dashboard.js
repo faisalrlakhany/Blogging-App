@@ -28,7 +28,7 @@ import {  onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.1.0/fi
 
         event.preventDefault();
         inputFile.open();
-    })
+    },false)
 
     form.addEventListener('submit' , async(event)=> {
 

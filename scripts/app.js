@@ -1,34 +1,38 @@
 
     import { onAuthStateChanged , signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
     import { auth, db } from "./firebaseconfig.js";
-    import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+    import { collection, getDocs, query , where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 
 const logout = document.querySelector("#log-out")
-const logOutDesktop = document.querySelector("#log-out-desktop")
-const loginBtn = document.querySelector("#login-btn");
-const userInfo = document.querySelector("#user-info");
-const hamburgerBtn = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
+const log = document.querySelector("#log-out-desktop")
+const loginBtn = document.querySelector("#login-btn")
+const userInfo = document.querySelector("#user-info")
+const hamburgerBtn = document.getElementById('hamburger')
+const mobileMenu = document.getElementById('mobile-menu')
 const userName = document.querySelector("#user-name")
 const userImage = document.querySelector("#user-image")
-const mobileBtn = document.querySelector("#mobile-btn")
 const mobileLogin = document.querySelector("#mobile-login")
 const allBlogData = []
 const displayBlog = document.querySelector("#display-container")
+const username1 = document.querySelector("#user-name1")
+const userimage1 = document.querySelector("#user-image1")
+
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const uid = user.uid;
         console.log(uid);
-        let registeredUser = await getDataFromFirestore()
-        console.log(registeredUser);
+        let registered = await getDataFromFirestore()
+        console.log(registered);
         loginBtn.classList.remove('md:block')
         userInfo.classList.add('md:flex')
         mobileLogin.classList.add('hidden')
 
-        userName.innerHTML = registeredUser.fullName
-        userImage.src = registeredUser.profileImage
+        userName.innerHTML = registered.fullName
+        username1.innerHTML = registered.fullName
+        userImage.src = registered.profileImage
+        userimage1.src = registered.profileImage
 
         getBlogFromFirestore();
 
@@ -47,7 +51,7 @@ hamburgerBtn.addEventListener('click', () => {
 
 async function getDataFromFirestore() {
     let user = null
-    const q = query(collection(db, "registered"));
+    const q = query(collection(db, "registered"),where("uid", "==", auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         user = doc.data()
@@ -58,27 +62,32 @@ async function getDataFromFirestore() {
 }
 
 
-logOutDesktop.addEventListener('click' , () => {
-    signOut(auth).then(() => {
-        window.location = 'login.html';
-        
-      }).catch((error) => {
-        console.log(error);
-        
-      });
-      
-  })
+log.addEventListener('click' , (event)=>{
 
-  logout.addEventListener('click' , () => {
+
+    console.log("working");
+
     signOut(auth).then(() => {
-        window.location = 'login.html';
-        
+        console.log("logged out");
+        window.location = 'login.html'
       }).catch((error) => {
         console.log(error);
-        
       });
-      
-  })
+})
+
+logout.addEventListener('click' , (event)=>{
+
+
+    console.log("working");
+
+    signOut(auth).then(() => {
+        console.log("logged out");
+        window.location = 'login.html'
+      }).catch((error) => {
+        console.log(error);
+      });
+})
+
 
 
 

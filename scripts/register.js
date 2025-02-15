@@ -37,7 +37,7 @@
         inputFile.open()
 
 
-    })
+    },false)
 
 
 
@@ -61,7 +61,6 @@
         // Signed up 
            const user = userCredential.user;
            console.log(user);
-           window.location = 'login.html';
 
         try {
             const docRef = await addDoc(collection(db, "registered"), {
